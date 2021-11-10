@@ -1,4 +1,6 @@
 import React, { useContext, useState } from 'react';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
 import { storage, database } from '../firebase';
 function Signup() {
@@ -6,9 +8,10 @@ function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [file, setFile] = useState(null);
-    const [, setError] = useState('');
+    const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const { signup } = useContext(AuthContext);
+    const { signup, currentUser } = useContext(AuthContext);
+    const history = useHistory();
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
@@ -42,7 +45,7 @@ function Signup() {
                 await database.users.doc(uid).set({
                     email: email,
                     userId: uid,
-                    userName: name,
+                    username: name,
                     createdAt: database.getCurrentTimeStamp(),
                     profileUrl: downloadUrl,
                     postIds: []
@@ -66,6 +69,11 @@ function Signup() {
             setFile(file);
         }
     }
+    useEffect(()=>{
+        if(currentUser){
+            history.push('/');
+        }
+    },[currentUser])
     return (
         <div>
             <form onSubmit={handleSignup} >
