@@ -119,12 +119,16 @@ function Posts({ userData = null }) {
                     {
                         posts.map((post) => (
                             <React.Fragment key={post.postId}>
+
                                 <div className='videos'>
+
+
                                     <Video source={post.pUrl} id={post.pId} />
                                     <div className='fa' style={{ display: 'flex' }}>
                                         <Avatar src={post.uProfile}></Avatar>
                                         <h4>{post.uName}</h4>
                                     </div>
+
                                     <Likes userData={userData} postData={post} />
                                     <ChatBubbleIcon onClick={() => handleClickOpen(post.pId)} className={`${classes.ci} icon-styling`} />
                                     <Dialog maxWidth="md" onClose={handleClose} aria-labelledby="customized-dialog-title" open={openId === post.pId}>
@@ -160,7 +164,8 @@ function Posts({ userData = null }) {
                                                     </Card>
                                                     <div className='extra'>
                                                         <div className='likes'>
-                                                            <Typography className={classes.typo} variant='body2'>Liked By {post.likes.length == 0 ? 'nobody' : ` others`}</Typography>
+                                                            <Typography className={classes.typo} variant='body2'>
+                                                                {post.likes.length} likes</Typography>
                                                         </div>
                                                         {/* <AddComment  userData={userData} postData={post}/>  */}
                                                         <AddComment userData={userData} postData={post} />

@@ -3,8 +3,6 @@ import './App.css';
 import AuthProvider from './Context/AuthProvider';
 import Signup from './Components/Signup';
 import Login from './Components/Login'
-import Main from './MaterialUI/Main';
-import Ioa from './Components/Ioa';
 import PrivateRoute from './Components/PrivateRoute';
 import Feed from './Components/Feed';
 function App() {
